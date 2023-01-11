@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "reserva_carrito_tablets")
-public class ReservaCarritoTablets
+@Table(name = "reserva_carrito_pcs")
+public class ReservaCarritoPcs
 {
     @ManyToOne
     @JoinColumn(name = "id_profesor")
@@ -14,9 +14,9 @@ public class ReservaCarritoTablets
     private Profesor idProfesor;
 
     @ManyToOne
-    @JoinColumn(name = "id_carrito_tablets")
-    @MapsId("idCarritoTablets")
-    private CarritoTablets idCarritoTablets;
+    @JoinColumn(name = "id_carrito_pcs")
+    @MapsId("idCarritoPcs")
+    private CarritoPcs idCarritoPcs;
 
     @Id
     @Column(length = 50, nullable = false)
@@ -25,7 +25,7 @@ public class ReservaCarritoTablets
     @Column(length = 25, nullable = false)
     private String ubicacionPrestamo;
 
-    public ReservaCarritoTablets()
+    public ReservaCarritoPcs()
     {
     }
 }

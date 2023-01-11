@@ -2,30 +2,22 @@ package es.iesjandula.reservascarritos.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "reserva_carrito_pcs")
-public class ReservaCarritoPcs
+@Embeddable
+public class ReservaCarritoPcsId implements Serializable
 {
-    @ManyToOne
-    @JoinColumn(name = "id_profesor")
-    @MapsId("idProfesor")
-    private Profesor idProfesor;
 
-    @ManyToOne
-    @JoinColumn(name = "id_carrito_pcs")
-    @MapsId("idCarritoPcs")
-    private CarritoPcs idCarritoPcs;
+    private Long idProfesor;
+
+    private Long idCarritoPcs;
 
     @Id
     @Column(length = 50, nullable = false)
     private Date fecha;
 
-    @Column(length = 25, nullable = false)
-    private String ubicacionPrestamo;
-
-    public ReservaCarritoPcs()
+    public ReservaCarritoPcsId()
     {
     }
 }
