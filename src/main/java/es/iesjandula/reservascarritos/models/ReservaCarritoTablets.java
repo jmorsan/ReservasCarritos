@@ -8,6 +8,9 @@ import java.util.Date;
 @Table(name = "reserva_carrito_tablets")
 public class ReservaCarritoTablets
 {
+    @EmbeddedId
+    private ReservaCarritoTabletsId reservaCarritoTabletsId;
+
     @ManyToOne
     @JoinColumn(name = "id_profesor")
     @MapsId("idProfesor")
@@ -18,8 +21,7 @@ public class ReservaCarritoTablets
     @MapsId("idCarritoTablets")
     private CarritoTablets idCarritoTablets;
 
-    @Id
-    @Column(length = 50, nullable = false)
+    @MapsId("fecha")
     private Date fecha;
 
     @Column(length = 25, nullable = false)
@@ -27,5 +29,55 @@ public class ReservaCarritoTablets
 
     public ReservaCarritoTablets()
     {
+    }
+
+    public ReservaCarritoTabletsId getReservaCarritoTabletsId()
+    {
+        return reservaCarritoTabletsId;
+    }
+
+    public void setReservaCarritoTabletsId(ReservaCarritoTabletsId reservaCarritoTabletsId)
+    {
+        this.reservaCarritoTabletsId = reservaCarritoTabletsId;
+    }
+
+    public Profesor getIdProfesor()
+    {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(Profesor idProfesor)
+    {
+        this.idProfesor = idProfesor;
+    }
+
+    public CarritoTablets getIdCarritoTablets()
+    {
+        return idCarritoTablets;
+    }
+
+    public void setIdCarritoTablets(CarritoTablets idCarritoTablets)
+    {
+        this.idCarritoTablets = idCarritoTablets;
+    }
+
+    public Date getFecha()
+    {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha)
+    {
+        this.fecha = fecha;
+    }
+
+    public String getUbicacionPrestamo()
+    {
+        return ubicacionPrestamo;
+    }
+
+    public void setUbicacionPrestamo(String ubicacionPrestamo)
+    {
+        this.ubicacionPrestamo = ubicacionPrestamo;
     }
 }

@@ -8,16 +8,45 @@ import java.util.Date;
 @Embeddable
 public class ReservaCarritoPcsId implements Serializable
 {
+    private static final long serialVersionUID = 5555119262846834919L;
 
     private Long idProfesor;
 
     private Long idCarritoPcs;
 
-    @Id
-    @Column(length = 50, nullable = false)
     private Date fecha;
 
     public ReservaCarritoPcsId()
     {
+    }
+
+    public Long getIdProfesor()
+    {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(Long idProfesor)
+    {
+        this.idProfesor = idProfesor;
+    }
+
+    public Long getIdCarritoPcs()
+    {
+        return idCarritoPcs;
+    }
+
+    public void setIdCarritoPcs(Long idCarritoPcs)
+    {
+        this.idCarritoPcs = idCarritoPcs;
+    }
+
+    public Date getFecha()
+    {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha)
+    {
+        this.fecha = fecha;
     }
 }
