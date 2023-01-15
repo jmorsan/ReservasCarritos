@@ -21,9 +21,6 @@ public class ReservaCarritoPcs
     @MapsId("idCarritoPcs")
     private CarritoPcs idCarritoPcs;
 
-    @MapsId("fecha")
-    private Date fecha;
-
     @Column(length = 25, nullable = false)
     private String ubicacionPrestamo;
 
@@ -59,16 +56,6 @@ public class ReservaCarritoPcs
     public void setIdCarritoPcs(CarritoPcs idCarritoPcs)
     {
         this.idCarritoPcs = idCarritoPcs;
-    }
-
-    public Date getFecha()
-    {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha)
-    {
-        this.fecha = fecha;
     }
 
     public String getUbicacionPrestamo()

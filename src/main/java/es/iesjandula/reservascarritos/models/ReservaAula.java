@@ -21,9 +21,6 @@ public class ReservaAula
     @MapsId("idAulaInformatica")
     private AulaInformatica idAulaInformatica;
 
-    @MapsId("fecha")
-    private Date fecha;
-
     public ReservaAula()
     {
     }
@@ -58,13 +55,4 @@ public class ReservaAula
         this.idAulaInformatica = idAulaInformatica;
     }
 
-    public Date getFecha()
-    {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha)
-    {
-        this.fecha = fecha;
-    }
 }

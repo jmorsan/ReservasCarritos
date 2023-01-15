@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>es.iesjandula</groupId>
-    <artifactId>ReservasCarritos</artifactId>
+    <artifactId>Reservas</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ReservasCarritos</name>
     <description>ReservasCarritos</description>
