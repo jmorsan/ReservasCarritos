@@ -1,0 +1,163 @@
+swagger: '2.0'
+host: localhost:8080
+basePath: /reservas
+produces:
+  - aplication/json
+info:
+  version: 1.0.0
+  title: IES Jándula Website
+  description: This is my project description
+  contact:
+    name: Joaquín Moreno Sánchez
+    email: jmorsan426@g.educaand.es
+    url: https://github.com/jmorsan/
+schemes:
+  - http
+  - https
+  
+################################################################################################################
+#                                              PATHS                                                           #
+#############################################################################################################
+paths:
+  /:
+    get:
+      operationId: getReservas
+      description: Devuelve las reservas
+      responses:
+        200:
+          description: Devuelve todas las reservas
+        505:
+          description: Server error
+          schema:
+            $ref: '#/definitions/ReservasError'
+  
+  /reservar_aula/:
+    post:
+      operationId: reservarAula
+      description: Reserva una aula
+      parameters:
+        - name: reservaAula
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReservaAula'
+      responses:
+        200:
+          description: Reserva de aula exitosa
+        422:
+          description: Error al pasar parametros
+          schema:
+            $ref: '#/definitions/ReservasError'
+        505:
+          description: Server error
+          schema:
+            $ref: '#/definitions/ReservasError'
+    
+  /reservar_carrito_tablets/:
+    post:
+      operationId: carritoTablets
+      description: Reserva un carrito de tablets
+      parameters:
+        - name: reservaCarritoTablets
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReservaCarritoTablets'
+      responses:
+        200:
+          description: Reserva de carrito de tablets exitosa 
+        422:
+          description: Error al pasar parametros
+          schema:
+            $ref: '#/definitions/ReservasError'
+        505:
+          description: Server error
+          schema:
+            $ref: '#/definitions/ReservasError'
+            
+  /reservar_carrito_pcs/:
+    post:
+      operationId: carritoPcs
+      description: Reserva un carrito de ordenadores
+      parameters:
+        - name: reservaCarritoPcs
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReservaCarritoPcs'
+      responses:
+        200:
+          description: Reserva de carrito de pcs exitosa 
+        422:
+          description: Error al pasar parametros
+          schema:
+            $ref: '#/definitions/ReservasError'
+        505:
+          description: Server error
+          schema:
+            $ref: '#/definitions/ReservasError'
+            
+  /confirmacion/:
+    post:
+      operationId: confirmacion
+      description: Almacena los datos en el servidor
+      responses:
+        200:
+          description: Exito al almacenar los datos en el servidor
+        505:
+          description: Server error
+          schema:
+            $ref: '#/definitions/ReservasError'
+
+definitions:
+  ReservaAula:
+    type: object
+    description: reserva de aula
+    properties:
+      fecha:
+        description: Fecha de la reserva
+        type: number
+      idProfesor:
+        description: Identificador del profesor
+        type: number
+      idAularInformatica:
+        description: Identificador del la aula de informatica
+        type: number
+  
+  ReservaCarritoTablets:
+    type: object
+    description: reserva de carritos de tablets
+    properties:
+      fecha:
+        description: Fecha de la reserva
+        type: number
+      idProfesor:
+        description: Identificador del profesor
+        type: number
+      idCarritoTablets:
+        description: Identificador del carrito de tablets
+        type: number
+        
+  ReservaCarritoPcs:
+    type: object
+    description: reserva de carritos de pcs
+    properties:
+      fecha:
+        description: Fecha de la reserva
+        type: number
+      idProfesor:
+        description: Identificador del profesor
+        type: number
+      idCarritoPcs:
+        description: Identificador del carrito de pcs
+        type: number
+        
+  ReservasError:
+    type: object
+    properties:
+      errorId:
+        type: string
+        description: This is the error id
+      mensaje:
+        type: string
+        description: This is the mensaje of error
