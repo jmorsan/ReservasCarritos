@@ -109,6 +109,74 @@ paths:
           schema:
             $ref: '#/definitions/ReservasError'
 
+  /cancelarAula/:
+    delete:
+      operationId: cancelarAula
+      description: Cancela una reserva de aula
+      parameters:
+        - name: reservaAula
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReservaAula'
+      responses:
+        200:
+          description: Exito al cancelar la reserva del aula
+        404:
+          description: Reserva de aula no encontrada
+          schema:
+            $ref: '#/definitions/ReservasError'
+        505:
+          description: Server error
+          schema:
+            $ref: '#/definitions/ReservasError'
+
+  /cancelarCarritoPcs/:
+    delete:
+      operationId: cancelarCarritoPcs
+      description: Cancela una reserva de un carrito de ordenadores
+      parameters:
+        - name: reservaCarritoPcs
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReservaCarritoPcs'
+      responses:
+        200:
+          description: Exito al cancelar la reserva de un carrito de ordenadores
+        404:
+          description: Reserva de aula no encontrada
+          schema:
+            $ref: '#/definitions/ReservasError'
+        505:
+          description: Server error
+          schema:
+            $ref: '#/definitions/ReservasError'
+
+  /cancelarCarritoTablets/:
+    delete:
+      operationId: cancelarCarritoTablets
+      description: Cancela una reserva de un carrito de tablets
+      parameters:
+        - name: reservaCarritoTablets
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReservaCarritoTablets'
+      responses:
+        200:
+          description: Exito al cancelar la reserva de un carrito de tablets
+        404:
+          description: Reserva de aula no encontrada
+          schema:
+            $ref: '#/definitions/ReservasError'
+        505:
+          description: Server error
+          schema:
+            $ref: '#/definitions/ReservasError'
+
+
+
 definitions:
   ReservaAula:
     type: object

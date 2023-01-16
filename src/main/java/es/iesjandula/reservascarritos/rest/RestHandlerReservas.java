@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+/**
 @RequestMapping(value = "/reservas", produces = {"application/json"})
 @RestController //
 public class RestHandlerReservas
@@ -18,7 +18,7 @@ public class RestHandlerReservas
         //Empty constructor
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/reservas/")
+    @RequestMapping(method = RequestMethod.GET, value = "/")
     public ResponseEntity<?> getReservas()
     {
 
@@ -48,7 +48,22 @@ public class RestHandlerReservas
 
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/cancelarAula/")
+    public ResponseEntity<?> cancelar(@RequestBody(required=true) final ReservaAula reservaAula)
+    {
 
+    }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/cancelarCarritoPcs/")
+    public ResponseEntity<?> cancelar(@RequestBody(required=true) final ReservaCarritoPcs reservaCarritoPcs)
+    {
 
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/cancelarCarritoTablets/")
+    public ResponseEntity<?> cancelar(@RequestBody(required=true) final ReservaCarritoTablets reservaCarritoTablets)
+    {
+
+    }
 }
+ **/
