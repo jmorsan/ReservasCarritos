@@ -1,6 +1,7 @@
 package es.iesjandula.reservascarritos.repositories;
 
 import es.iesjandula.reservascarritos.models.CarritoPcs;
+import es.iesjandula.reservascarritos.models.ReservaCarritoPcs;
 import es.iesjandula.reservascarritos.models.ReservaCarritoPcsId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -9,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * ReservaCarritoPcs Repository
  */
-public interface IReservaCarritoPcsRepository extends JpaRepository<CarritoPcs, ReservaCarritoPcsId>
+public interface IReservaCarritoPcsRepository extends JpaRepository<ReservaCarritoPcs, ReservaCarritoPcsId>
 {
 }

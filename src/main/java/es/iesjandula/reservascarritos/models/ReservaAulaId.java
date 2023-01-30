@@ -22,6 +22,13 @@ public class ReservaAulaId implements Serializable
     {
     }
 
+    public ReservaAulaId(Long idProfesor, Long idAulaInformatica, Date fecha)
+    {
+        this.idProfesor = idProfesor;
+        this.idAulaInformatica = idAulaInformatica;
+        this.fecha = fecha;
+    }
+
     public Long getIdProfesor()
     {
         return idProfesor;

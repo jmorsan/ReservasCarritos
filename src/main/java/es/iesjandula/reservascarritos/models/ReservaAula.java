@@ -25,6 +25,13 @@ public class ReservaAula
     {
     }
 
+    public ReservaAula(ReservaAulaId reservaAulaId, Profesor idProfesor, AulaInformatica idAulaInformatica)
+    {
+        this.reservaAulaId = reservaAulaId;
+        this.idProfesor = idProfesor;
+        this.idAulaInformatica = idAulaInformatica;
+    }
+
     public ReservaAulaId getReservaAulaId()
     {
         return reservaAulaId;
