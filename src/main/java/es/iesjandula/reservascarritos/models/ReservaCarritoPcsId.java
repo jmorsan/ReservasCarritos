@@ -20,6 +20,13 @@ public class ReservaCarritoPcsId implements Serializable
     {
     }
 
+    public ReservaCarritoPcsId(Long idProfesor, Long idCarritoPcs, Date fecha)
+    {
+        this.idProfesor = idProfesor;
+        this.idCarritoPcs = idCarritoPcs;
+        this.fecha = fecha;
+    }
+
     public Long getIdProfesor()
     {
         return idProfesor;

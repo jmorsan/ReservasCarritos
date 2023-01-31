@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Service
 public class Utils
 {
-    public HttpSession comprobarResevaAula(HttpSession httpSession)
+    public HttpSession comprobarResevaSession(HttpSession httpSession)
     {
         if(httpSession.getAttribute(Constantes.RESERVAS_AULAS)==null)
         {

@@ -44,7 +44,6 @@ public class RestHandlerReservas
     private Utils utils;
 
 
-
     public RestHandlerReservas()
     {
         //Empty constructor
@@ -72,7 +71,7 @@ public class RestHandlerReservas
     {
         try
         {
-            httpSession = utils.comprobarResevaAula(httpSession);
+            httpSession = utils.comprobarResevaSession(httpSession);
 
 
             Profesor profesor = this.iProfesorRepository.findById(idProfesor).orElse(null);
@@ -100,18 +99,55 @@ public class RestHandlerReservas
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/reservar_carrito_tablets")
+    public ResponseEntity<?> reservarCarritoTablets(HttpSession httpSession,
+                                                    @RequestParam Long idProfesor,
+                                                    @RequestParam Long idCarritoPcs,
+                                                    @RequestParam Long date,
+                                                    @RequestParam String ubicacionPrestamo)
+    {
+        try
+        {
+            httpSession = utils.comprobarResevaSession(httpSession);
+
+
+            Profesor profesor = this.iProfesorRepository.findById(idProfesor).orElse(null);
+
+            CarritoPcs carritoPcs = this.iCarritoPcsRepository.findById(idCarritoPcs).orElse(null);
+
+            if(profesor !=null && carritoPcs != null)
+            {
+                ReservaCarritoPcs reservaCarritoPcs = new ReservaCarritoPcs(new ReservaCarritoPcsId(idProfesor,idCarritoPcs,new Date(date)),profesor,carritoPcs,ubicacionPrestamo);
+
+                ((List<ReservaAula>)httpSession.getAttribute(Constantes.RESERVAS_AULAS)).add(reservaAula);
+
+                return ResponseEntity.ok(reservaAula);
+
+            }
+
+            return ResponseEntity.status(404).body("Profesor o Aula no encontrada");
+        }
+        catch (Exception exception)
+        {
+            Logger.error(exception.getStackTrace());
+
+            return ResponseEntity.status(500).body("Error Fatal");
+        }
+
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/confirmar")
     public ResponseEntity<?> confirmacion(HttpSession session)
     {
         try
         {
             List<ReservaAula> reservaAulaList = (List<ReservaAula>) session.getAttribute(Constantes.RESERVAS_AULAS);
-            List<ReservaCarritoTablets> reservaCarritoTablets = (List<ReservaCarritoTablets>) session.getAttribute(Constantes.RESERVA_CARRITOS_TABLETS);
-            List<ReservaCarritoPcs> reservaCarritoPcs = (List<ReservaCarritoPcs>) session.getAttribute(Constantes.RESERVAS_CARRITOS_PCS);
+            List<ReservaCarritoTablets> reservaCarritoTabletsList = (List<ReservaCarritoTablets>) session.getAttribute(Constantes.RESERVA_CARRITOS_TABLETS);
+            List<ReservaCarritoPcs> reservaCarritoPcsList = (List<ReservaCarritoPcs>) session.getAttribute(Constantes.RESERVAS_CARRITOS_PCS);
 
             this.iReservaAulaRepository.saveAllAndFlush(reservaAulaList);
-            this.iReservaCarritoTabletsRepository.saveAllAndFlush(reservaCarritoTablets);
-            this.iReservaCarritoPcsRepository.saveAllAndFlush(reservaCarritoPcs);
+            this.iReservaCarritoTabletsRepository.saveAllAndFlush(reservaCarritoTabletsList);
+            this.iReservaCarritoPcsRepository.saveAllAndFlush(reservaCarritoPcsList);
 
             session.removeAttribute(Constantes.RESERVAS_AULAS);
             session.removeAttribute(Constantes.RESERVA_CARRITOS_TABLETS);
@@ -126,11 +162,7 @@ public class RestHandlerReservas
 
     }
 /**
-    @RequestMapping(method = RequestMethod.POST, value = "/reservar_carrito_tablets")
-    public ResponseEntity<?> reservarCarritoTablets(@RequestBody(required=true) final ReservaCarritoTablets reservaCarritoTablets)
-    {
 
-    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/reservar_carrito_pcs")
     public ResponseEntity<?> reservarCarritoPcs(@RequestBody(required=true) final ReservaCarritoPcs reservaCarritoPcs)
