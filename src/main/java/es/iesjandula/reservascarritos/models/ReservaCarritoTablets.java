@@ -28,6 +28,14 @@ public class ReservaCarritoTablets
     {
     }
 
+    public ReservaCarritoTablets(ReservaCarritoTabletsId reservaCarritoTabletsId, Profesor idProfesor, CarritoTablets idCarritoTablets, String ubicacionPrestamo)
+    {
+        this.reservaCarritoTabletsId = reservaCarritoTabletsId;
+        this.idProfesor = idProfesor;
+        this.idCarritoTablets = idCarritoTablets;
+        this.ubicacionPrestamo = ubicacionPrestamo;
+    }
+
     public ReservaCarritoTabletsId getReservaCarritoTabletsId()
     {
         return reservaCarritoTabletsId;
