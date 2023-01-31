@@ -49,7 +49,7 @@ public class RestHandlerReservas
         //Empty constructor
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/MostrarReservas")
+    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas/")
     public ResponseEntity<?> getReservas()
     {
 
@@ -60,6 +60,43 @@ public class RestHandlerReservas
         List<ReservaCarritoTablets> reservaCarritoTablets = this.iReservaCarritoTabletsRepository.findAll();
 
         return ResponseEntity.ok().body(new Reservas(reservaAulaList , reservaCarritoPcs , reservaCarritoTablets));
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas_aula/")
+    public ResponseEntity<?> getReservasAula()
+    {
+
+        List<ReservaAula> reservaAulaList = this.iReservaAulaRepository.findAll();
+
+
+        return ResponseEntity.ok().body(reservaAulaList);
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas_carrito_tablets/")
+    public ResponseEntity<?> getReservasCarritoTablets()
+    {
+
+
+
+        List<ReservaCarritoTablets> reservaCarritoTablets = this.iReservaCarritoTabletsRepository.findAll();
+
+        return ResponseEntity.ok().body(reservaCarritoTablets);
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas_carritopcs/")
+    public ResponseEntity<?> getReservasCarritoPcs()
+    {
+
+
+
+        List<ReservaCarritoPcs> reservaCarritoPcs = this.iReservaCarritoPcsRepository.findAll();
+
+
+
+        return ResponseEntity.ok().body(reservaCarritoPcs);
 
     }
 
@@ -174,7 +211,7 @@ public class RestHandlerReservas
 
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/cancelarAula")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/cancelar_aula")
     public ResponseEntity<?> cancelarAula(@RequestParam(required = true) Long idProfesor,
                                       @RequestParam(required = true) Long idAulaInformatica,
                                       @RequestParam(required = true) Long date)
@@ -194,7 +231,7 @@ public class RestHandlerReservas
 
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/cancelarCarritoPcs")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/cancelar_carrito_pcs")
     public ResponseEntity<?> cancelarCarritoPcs(@RequestParam Long idProfesor,
                                                 @RequestParam Long idCarritoPcs,
                                                 @RequestParam Long date)
@@ -214,7 +251,7 @@ public class RestHandlerReservas
 
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/cancelarCarritoTablets")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/cancelar_carrito_tablets")
     public ResponseEntity<?> cancelarCarritoTablets(@RequestParam Long idProfesor,
                                                     @RequestParam Long idCarritoTablets,
                                                     @RequestParam Long date)
