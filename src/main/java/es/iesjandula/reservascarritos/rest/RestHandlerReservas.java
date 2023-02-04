@@ -261,8 +261,8 @@ public class RestHandlerReservas
 
             this.iReservaCarritoTabletsRepository.deleteById(new ReservaCarritoTabletsId(idProfesor,idCarritoTablets,new Date(date)));
 
-
             return ResponseEntity.ok().build();
+
         }
         catch (Exception exception)
         {

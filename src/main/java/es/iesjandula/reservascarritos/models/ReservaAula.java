@@ -1,21 +1,31 @@
 package es.iesjandula.reservascarritos.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Date;
-
+/**
+ * @author Joaquin Moreno
+ *
+ * Clase Aula Informatica
+ */
 @Entity
 @Table(name = "reserva_aula")
+@Getter
+@Setter
 public class ReservaAula
 {
+    /** Atributo - identificador unico compuesto del reserva. */
     @EmbeddedId
     private ReservaAulaId reservaAulaId;
 
+    /** Atributo - identificador unico del profesor que hace la reserva. */
     @ManyToOne
     @JoinColumn(name = "id_profesor")
     @MapsId("idProfesor")
     private Profesor idProfesor;
 
+    /** Atributo - identificador unico del aula que se reserva. */
     @ManyToOne
     @JoinColumn(name = "id_aula_informatica")
     @MapsId("idAulaInformatica")
@@ -29,36 +39,6 @@ public class ReservaAula
     {
         this.reservaAulaId = reservaAulaId;
         this.idProfesor = idProfesor;
-        this.idAulaInformatica = idAulaInformatica;
-    }
-
-    public ReservaAulaId getReservaAulaId()
-    {
-        return reservaAulaId;
-    }
-
-    public void setReservaAulaId(ReservaAulaId reservaAulaId)
-    {
-        this.reservaAulaId = reservaAulaId;
-    }
-
-    public Profesor getIdProfesor()
-    {
-        return idProfesor;
-    }
-
-    public void setIdProfesor(Profesor idProfesor)
-    {
-        this.idProfesor = idProfesor;
-    }
-
-    public AulaInformatica getIdAulaInformatica()
-    {
-        return idAulaInformatica;
-    }
-
-    public void setIdAulaInformatica(AulaInformatica idAulaInformatica)
-    {
         this.idAulaInformatica = idAulaInformatica;
     }
 
