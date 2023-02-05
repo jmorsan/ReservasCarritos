@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 public class ReservaAula
 {
-    /** Atributo - identificador unico compuesto del reserva. */
+    /** Atributo - identificador unico compuesto de la reserva del aula. */
     @EmbeddedId
     private ReservaAulaId reservaAulaId;
 
@@ -31,10 +31,17 @@ public class ReservaAula
     @MapsId("idAulaInformatica")
     private AulaInformatica idAulaInformatica;
 
+    /** Constructor vacio. */
     public ReservaAula()
     {
     }
 
+    /**
+     * Constructor por parametros
+     * @param reservaAulaId con el identificador unico compuesto del reserva.
+     * @param idProfesor con el identificador unico del profesor que hace la reserva.
+     * @param idAulaInformatica con el identificador unico del aula que se reserva.
+     */
     public ReservaAula(ReservaAulaId reservaAulaId, Profesor idProfesor, AulaInformatica idAulaInformatica)
     {
         this.reservaAulaId = reservaAulaId;

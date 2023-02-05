@@ -19,163 +19,275 @@ schemes:
 #                                              PATHS                                                           #
 #############################################################################################################
 paths:
-  /:
+  /mostrar_reservas:
     get:
       operationId: getReservas
       description: Devuelve las reservas
       responses:
         200:
           description: Devuelve todas las reservas
-        505:
-          description: Server error
+
+  /mostrar_reservas_aula:
+    get:
+      operationId: getReservasAula
+      description: Devuelve las reservas de aula
+      responses:
+        200:
+          description: Devuelve una lista con todas las reservas de aula
           schema:
-            $ref: '#/definitions/ReservasError'
+            type: array
+            items:
+              $ref: '#/definitions/ReservaAula'
+
+  /mostrar_reservas_carrito_tablets:
+    get:
+      operationId: getReservasCarritoTablets
+      description: Devuelve las reservas de carritos tablets
+      responses:
+        200:
+          description: Devuelve una lista con todas las reservas de carritos tablets
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReservaCarritoTablets'
+
+  /mostrar_reservas_carritopcs:
+    get:
+      operationId: getReservasCarritoPcs
+      description: Devuelve las reservas de carritos pcs
+      responses:
+        200:
+          description: Devuelve una lista con todas las reservas de carritos pcs
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReservaCarritoPcs'
+
   
-  /reservar_aula/:
+  /reservarAula:
     post:
       operationId: reservarAula
-      description: Reserva una aula
+      description: reserva de un aula
       parameters:
-        - name: reservaAula
-          in: body
+        - name: idProfesor
+          description: id del profesor
+          in: query
+          type: integer
+          format: int64
           required: true
-          schema:
-            $ref: '#/definitions/ReservaAula'
+        - name: idAulaInformatica
+          description: id del aula
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: date
+          description: fecha de la reserva
+          in: query
+          type: integer
+          format: int64
+          required: true
       responses:
         200:
           description: Reserva de aula exitosa
-        422:
-          description: Error al pasar parametros
           schema:
-            $ref: '#/definitions/ReservasError'
-        505:
-          description: Server error
-          schema:
-            $ref: '#/definitions/ReservasError'
-    
-  /reservar_carrito_tablets/:
+            $ref: '#/definitions/ReservaAula'
+        404:
+          description: Profesor o Aula no encontrada
+        500:
+          description: Error Fatal
+
+  /reservar_carrito_pcs:
     post:
-      operationId: carritoTablets
-      description: Reserva un carrito de tablets
+      operationId: reservarCarritoPcs
+      description: reserva de un carrito de pcs
       parameters:
-        - name: reservaCarritoTablets
-          in: body
+        - name: idProfesor
+          description: id del profesor
+          in: query
+          type: integer
+          format: int64
           required: true
-          schema:
-            $ref: '#/definitions/ReservaCarritoTablets'
+        - name: idCarritoPcs
+          description: id del carrito de pcs
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: date
+          description: fecha de la reserva
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: ubicacionPrestamo
+          description: ubicacion del carrito
+          in: query
+          type: string
+          required: true
       responses:
         200:
-          description: Reserva de carrito de tablets exitosa 
-        422:
-          description: Error al pasar parametros
-          schema:
-            $ref: '#/definitions/ReservasError'
-        505:
-          description: Server error
-          schema:
-            $ref: '#/definitions/ReservasError'
-            
-  /reservar_carrito_pcs/:
-    post:
-      operationId: carritoPcs
-      description: Reserva un carrito de ordenadores
-      parameters:
-        - name: reservaCarritoPcs
-          in: body
-          required: true
+          description: Reserva de aula exitosa
           schema:
             $ref: '#/definitions/ReservaCarritoPcs'
+        404:
+          description: Profesor o Carrito pcs no encontrado
+        500:
+          description: Error Fatal
+
+  /reservar_carrito_tablets:
+    post:
+      operationId: reservarCarritoTablets
+      description: reserva de un carrito de tablets
+      parameters:
+        - name: idProfesor
+          description: id del profesor
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: idCarritoTablets
+          description: id del carrito de tablets
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: date
+          description: fecha de la reserva
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: ubicacionPrestamo
+          description: ubicacion del carrito
+          in: query
+          type: string
+          required: true
       responses:
         200:
-          description: Reserva de carrito de pcs exitosa 
-        422:
-          description: Error al pasar parametros
+          description: Reserva de aula exitosa
           schema:
-            $ref: '#/definitions/ReservasError'
-        505:
-          description: Server error
-          schema:
-            $ref: '#/definitions/ReservasError'
-            
-  /confirmacion/:
+            $ref: '#/definitions/ReservaCarritoTablets'
+        404:
+          description: Profesor o Carrito pcs no encontrado
+        500:
+          description: Error Fatal
+
+  /confirmar:
     post:
       operationId: confirmacion
       description: Almacena los datos en el servidor
       responses:
         200:
           description: Exito al almacenar los datos en el servidor
-        505:
-          description: Server error
-          schema:
-            $ref: '#/definitions/ReservasError'
+        500:
+          description: Error Fatal
 
-  /cancelarAula/:
+  /cancelar_reserva_aula:
     delete:
-      operationId: cancelarAula
-      description: Cancela una reserva de aula
+      operationId: cancelarReservaAula
+      description: cancela una reserva de un aula
       parameters:
-        - name: reservaAula
-          in: body
+        - name: idProfesor
+          description: id del profesor
+          in: query
+          type: integer
+          format: int64
           required: true
-          schema:
-            $ref: '#/definitions/ReservaAula'
+        - name: idAulaInformatica
+          description: id del aula
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: date
+          description: fecha de la reserva
+          in: query
+          type: integer
+          format: int64
+          required: true
       responses:
         200:
-          description: Exito al cancelar la reserva del aula
-        404:
-          description: Reserva de aula no encontrada
-          schema:
-            $ref: '#/definitions/ReservasError'
-        505:
-          description: Server error
-          schema:
-            $ref: '#/definitions/ReservasError'
+          description: Cancelacion de la reserva exitosa
 
-  /cancelarCarritoPcs/:
+        404:
+          description: Reserva no encontrada en la BBDD/Sesion
+        500:
+          description: Error Fatal
+
+  /cancelar_reserva_carrito_pcs:
     delete:
-      operationId: cancelarCarritoPcs
-      description: Cancela una reserva de un carrito de ordenadores
+      operationId: cancelarReservaCarritoPcs
+      description: cancela una reserva de un carrito de pcs
       parameters:
-        - name: reservaCarritoPcs
-          in: body
+        - name: idProfesor
+          description: id del profesor
+          in: query
+          type: integer
+          format: int64
           required: true
-          schema:
-            $ref: '#/definitions/ReservaCarritoPcs'
+        - name: idCarritoPcs
+          description: id del carrito de pcs
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: date
+          description: fecha de la reserva
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: ubicacionPrestamo
+          description: ubicacion del carrito
+          in: query
+          type: string
+          required: true
       responses:
         200:
-          description: Exito al cancelar la reserva de un carrito de ordenadores
-        404:
-          description: Reserva de aula no encontrada
-          schema:
-            $ref: '#/definitions/ReservasError'
-        505:
-          description: Server error
-          schema:
-            $ref: '#/definitions/ReservasError'
+          description: Cancelacion de la reserva exitosa
 
-  /cancelarCarritoTablets/:
+        404:
+          description: Reserva no encontrada en la BBDD/Sesion
+        500:
+          description: Error Fatal
+
+  /cancelar_reserva_carrito_tablets:
     delete:
-      operationId: cancelarCarritoTablets
-      description: Cancela una reserva de un carrito de tablets
+      operationId: cancelarReservaCarritoTablets
+      description: cancela la reserva de un carrito de tablets
       parameters:
-        - name: reservaCarritoTablets
-          in: body
+        - name: idProfesor
+          description: id del profesor
+          in: query
+          type: integer
+          format: int64
           required: true
-          schema:
-            $ref: '#/definitions/ReservaCarritoTablets'
+        - name: idCarritoTablets
+          description: id del carrito de tablets
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: date
+          description: fecha de la reserva
+          in: query
+          type: integer
+          format: int64
+          required: true
+        - name: ubicacionPrestamo
+          description: ubicacion del carrito
+          in: query
+          type: string
+          required: true
       responses:
         200:
-          description: Exito al cancelar la reserva de un carrito de tablets
+          description: Cancelacion de la reserva exitosa
+
         404:
-          description: Reserva de aula no encontrada
-          schema:
-            $ref: '#/definitions/ReservasError'
-        505:
-          description: Server error
-          schema:
-            $ref: '#/definitions/ReservasError'
-
-
+          description: Reserva no encontrada en la BBDD/Sesion
+        500:
+          description: Error Fatal
 
 definitions:
   ReservaAula:
