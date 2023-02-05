@@ -1,0 +1,21 @@
+-MOSTRAR TODAS LAS RESERVAS:
+	http://localhost:8080/reservas/mostrar_reservas
+
+-CONFIRMACION:
+GET-> http://localhost:8080/reservas/confirmar
+
+-AULA INFORMATICA:
+GET-> http://localhost:8080/reservas/mostrar_reservas_aula
+POST-> http://localhost:8080/reservas/reservar_aula?idProfesor=1&idAulaInformatica=1&date=1675110856207
+DELETE-> http://localhost:8080/reservas/cancelar_reserva_aula?idProfesor=1&idAulaInformatica=1&date=1675110856207
+
+-CARRITO PCS:
+GET-> http://localhost:8080/reservas/mostrar_reservas_carrito_pcs
+POST-> http://localhost:8080/reservas/reservar_carrito_pcs?idProfesor=1&idCarritoPcs=2&date=1675110856207&ubicacionPrestamo=Casa
+DELETE-> http://localhost:8080/reservas/cancelar_reserva_carrito_pcs?idProfesor=1&idCarritoPcs=2&date=1675110856207
+
+-CARRITO TABLETS:
+GET-> http://localhost:8080/reservas/mostrar_reservas_carrito_tablets
+POST-> http://localhost:8080/reservas/reservar_carrito_tablets?idProfesor=1&idCarritoTablets=2&date=1675110856207&ubicacionPrestamo=Casa
+DELETE-> http://localhost:8080/reservas/cancelar_reserva_carrito_tablets?idProfesor=1&idCarritoTablets=2&date=1675110856207
+

@@ -69,7 +69,7 @@ public class RestHandlerReservas
     /**
      * @return todas las reservas
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas/")
+    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas")
     public ResponseEntity<?> getReservas()
     {
 
@@ -86,7 +86,7 @@ public class RestHandlerReservas
     /**
      * @return las reservas de aula
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas_aula/")
+    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas_aula")
     public ResponseEntity<?> getReservasAula()
     {
 
@@ -100,7 +100,7 @@ public class RestHandlerReservas
     /**
      * @return las reservas de carritos de tablets
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas_carrito_tablets/")
+    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas_carrito_tablets")
     public ResponseEntity<?> getReservasCarritoTablets()
     {
 
@@ -115,7 +115,7 @@ public class RestHandlerReservas
     /**
      * @return las reservas de carritos de pcs
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas_carritopcs/")
+    @RequestMapping(method = RequestMethod.GET, value = "/mostrar_reservas_carrito_pcs")
     public ResponseEntity<?> getReservasCarritoPcs()
     {
 
@@ -137,7 +137,7 @@ public class RestHandlerReservas
      *
      * @return realiza una reserva de un aula de informatica
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/reservar_aula/")
+    @RequestMapping(method = RequestMethod.POST, value = "/reservar_aula")
     public ResponseEntity<?> reservarAula(HttpSession httpSession,
                                           @RequestParam(required = true) Long idProfesor,
                                           @RequestParam(required = true) Long idAulaInformatica,

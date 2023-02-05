@@ -51,7 +51,7 @@ paths:
             items:
               $ref: '#/definitions/ReservaCarritoTablets'
 
-  /mostrar_reservas_carritopcs:
+  /mostrar_reservas_carrito_pcs:
     get:
       operationId: getReservasCarritoPcs
       description: Devuelve las reservas de carritos pcs
@@ -64,7 +64,7 @@ paths:
               $ref: '#/definitions/ReservaCarritoPcs'
 
   
-  /reservarAula:
+  /reservar_aula:
     post:
       operationId: reservarAula
       description: reserva de un aula
