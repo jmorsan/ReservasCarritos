@@ -1,5 +1,6 @@
 package es.iesjandula.reservascarritos.rest;
 
+import es.iesjandula.reservascarritos.exception.ReservasException;
 import es.iesjandula.reservascarritos.models.*;
 import es.iesjandula.reservascarritos.repositories.*;
 import es.iesjandula.reservascarritos.utils.Utils;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -147,6 +149,7 @@ public class RestHandlerReservas
         {
             httpSession = utils.comprobarResevaSession(httpSession);
 
+            ReservaAula reservaAula;
 
             Profesor profesor = this.iProfesorRepository.findById(idProfesor).orElse(null);
 
@@ -154,20 +157,27 @@ public class RestHandlerReservas
 
             if(profesor !=null && aulaInformatica != null)
             {
-                ReservaAula reservaAula = new ReservaAula(new ReservaAulaId(idProfesor,idAulaInformatica,new Date(date)),profesor,aulaInformatica);
+                reservaAula = new ReservaAula(new ReservaAulaId(idProfesor,idAulaInformatica,new Date(date)),profesor,aulaInformatica);
 
                 ((List<ReservaAula>)httpSession.getAttribute(Constantes.RESERVAS_AULAS)).add(reservaAula);
-
-                return ResponseEntity.ok(reservaAula);
-
+            }
+            else
+            {
+                throw new ReservasException("405","Profesor o Aula no encontrada");
             }
 
-            return ResponseEntity.status(404).body("Profesor o Aula no encontrada");
+            return ResponseEntity.ok(reservaAula);
+
+        }
+        catch (ReservasException reservasException)
+        {
+            reservasException.printStackTrace();
+            Logger.error(reservasException.getMessage());
+            return ResponseEntity.status(Integer.parseInt(reservasException.getCode())).body(reservasException.getMessage());
         }
         catch (Exception exception)
         {
-            Logger.error(exception.getStackTrace());
-
+            Logger.error("ERROR FATAL");
             return ResponseEntity.status(500).body("Error Fatal");
         }
 
@@ -193,6 +203,7 @@ public class RestHandlerReservas
         {
             httpSession = utils.comprobarResevaSession(httpSession);
 
+            ReservaCarritoPcs reservaCarritoPcs;
 
             Profesor profesor = this.iProfesorRepository.findById(idProfesor).orElse(null);
 
@@ -202,20 +213,29 @@ public class RestHandlerReservas
 
             if(profesor !=null && carritoPcs != null)
             {
-                ReservaCarritoPcs reservaCarritoPcs = new ReservaCarritoPcs(new ReservaCarritoPcsId(idProfesor,idCarritoPcs,new Date(date)),profesor,carritoPcs,ubicacionPrestamo);
+                reservaCarritoPcs = new ReservaCarritoPcs(new ReservaCarritoPcsId(idProfesor,idCarritoPcs,new Date(date)),profesor,carritoPcs,ubicacionPrestamo);
 
                 ((List<ReservaCarritoPcs>)httpSession.getAttribute(Constantes.RESERVAS_CARRITOS_PCS)).add(reservaCarritoPcs);
 
-                return ResponseEntity.ok(reservaCarritoPcs);
+
 
             }
+            else
+            {
+                throw new ReservasException("405","Profesor o Aula no encontrada");
+            }
 
-            return ResponseEntity.status(404).body("Profesor o Carrito pcs no encontrado");
+            return ResponseEntity.ok(reservaCarritoPcs);
+        }
+        catch (ReservasException reservasException)
+        {
+            reservasException.printStackTrace();
+            Logger.error(reservasException.getMessage());
+            return ResponseEntity.status(Integer.parseInt(reservasException.getCode())).body(reservasException.getMessage());
         }
         catch (Exception exception)
         {
-            Logger.error(exception.getStackTrace());
-
+            Logger.error("ERROR FATAL");
             return ResponseEntity.status(500).body("Error Fatal");
         }
 
@@ -241,6 +261,7 @@ public class RestHandlerReservas
         {
             httpSession = utils.comprobarResevaSession(httpSession);
 
+            ReservaCarritoTablets reservaCarritoTablets;
 
             Profesor profesor = this.iProfesorRepository.findById(idProfesor).orElse(null);
 
@@ -248,20 +269,29 @@ public class RestHandlerReservas
 
             if(profesor !=null && carritoTablets != null)
             {
-                ReservaCarritoTablets reservaCarritoTablets = new ReservaCarritoTablets(new ReservaCarritoTabletsId(idProfesor,idCarritoTablets,new Date(date)),profesor,carritoTablets,ubicacionPrestamo);
+                reservaCarritoTablets = new ReservaCarritoTablets(new ReservaCarritoTabletsId(idProfesor,idCarritoTablets,new Date(date)),profesor,carritoTablets,ubicacionPrestamo);
 
                 ((List<ReservaCarritoTablets>)httpSession.getAttribute(Constantes.RESERVA_CARRITOS_TABLETS)).add(reservaCarritoTablets);
 
-                return ResponseEntity.ok(reservaCarritoTablets);
+
 
             }
+            else
+            {
+                throw new ReservasException("405","Profesor o Aula no encontrada");
+            }
 
-            return ResponseEntity.status(404).body("Profesor o carrito no encontrado");
+            return ResponseEntity.ok(reservaCarritoTablets);
+        }
+        catch (ReservasException reservasException)
+        {
+            reservasException.printStackTrace();
+            Logger.error(reservasException.getMessage());
+            return ResponseEntity.status(Integer.parseInt(reservasException.getCode())).body(reservasException.getMessage());
         }
         catch (Exception exception)
         {
-            Logger.error(exception.getStackTrace());
-
+            Logger.error("ERROR FATAL");
             return ResponseEntity.status(500).body("Error Fatal");
         }
 
@@ -312,7 +342,7 @@ public class RestHandlerReservas
             }
             else
             {
-                return ResponseEntity.status(404).body("Reserva no encontrada en la BBDD/Sesion");
+                throw new ReservasException("404","Reserva no encontrada en la BBDD/Sesion");
 
             }
 
@@ -320,10 +350,15 @@ public class RestHandlerReservas
 
             return ResponseEntity.ok().build();
         }
+        catch (ReservasException reservasException)
+        {
+            reservasException.printStackTrace();
+            Logger.error(reservasException.getMessage());
+            return ResponseEntity.status(Integer.parseInt(reservasException.getCode())).body(reservasException.getMessage());
+        }
         catch (Exception exception)
         {
-            Logger.error(exception.getStackTrace());
-
+            Logger.error("ERROR FATAL");
             return ResponseEntity.status(500).body("Error Fatal");
         }
 
@@ -372,15 +407,21 @@ public class RestHandlerReservas
             }
             else
             {
-                return ResponseEntity.status(404).body("Reserva no encontrada en la BBDD/Sesion");
+                throw new ReservasException("404","Reserva no encontrada en la BBDD/Sesion");
+
             }
 
             return ResponseEntity.ok().build();
         }
+        catch (ReservasException reservasException)
+        {
+            reservasException.printStackTrace();
+            Logger.error(reservasException.getMessage());
+            return ResponseEntity.status(Integer.parseInt(reservasException.getCode())).body(reservasException.getMessage());
+        }
         catch (Exception exception)
         {
-            Logger.error(exception.getStackTrace());
-
+            Logger.error("ERROR FATAL");
             return ResponseEntity.status(500).body("Error Fatal");
         }
 
@@ -429,17 +470,23 @@ public class RestHandlerReservas
             }
             else
             {
-                return ResponseEntity.status(404).body("Reserva no encontrada en la BBDD/Sesion");
+                throw new ReservasException("404","Reserva no encontrada en la BBDD/Sesion");
+
             }
 
 
             return ResponseEntity.ok().build();
 
         }
+        catch (ReservasException reservasException)
+        {
+            reservasException.printStackTrace();
+            Logger.error(reservasException.getMessage());
+            return ResponseEntity.status(Integer.parseInt(reservasException.getCode())).body(reservasException.getMessage());
+        }
         catch (Exception exception)
         {
-            Logger.error(exception.getStackTrace());
-
+            Logger.error("ERROR FATAL");
             return ResponseEntity.status(500).body("Error Fatal");
         }
 
@@ -481,8 +528,7 @@ public class RestHandlerReservas
         }
         catch (Exception exception)
         {
-            Logger.error(exception.getStackTrace());
-
+            Logger.error("ERROR FATAL");
             return ResponseEntity.status(500).body("Error Fatal");
         }
 

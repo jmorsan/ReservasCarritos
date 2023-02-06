@@ -94,6 +94,8 @@ paths:
             $ref: '#/definitions/ReservaAula'
         404:
           description: Profesor o Aula no encontrada
+          schema:
+            $ref: '#/definitions/ReservasException'
         500:
           description: Error Fatal
 
@@ -132,6 +134,8 @@ paths:
             $ref: '#/definitions/ReservaCarritoPcs'
         404:
           description: Profesor o Carrito pcs no encontrado
+          schema:
+            $ref: '#/definitions/ReservasException'
         500:
           description: Error Fatal
 
@@ -170,6 +174,8 @@ paths:
             $ref: '#/definitions/ReservaCarritoTablets'
         404:
           description: Profesor o Carrito pcs no encontrado
+          schema:
+            $ref: '#/definitions/ReservasException'
         500:
           description: Error Fatal
 
@@ -212,6 +218,8 @@ paths:
 
         404:
           description: Reserva no encontrada en la BBDD/Sesion
+          schema:
+            $ref: '#/definitions/ReservasException'
         500:
           description: Error Fatal
 
@@ -249,6 +257,8 @@ paths:
 
         404:
           description: Reserva no encontrada en la BBDD/Sesion
+          schema:
+            $ref: '#/definitions/ReservasException'
         500:
           description: Error Fatal
 
@@ -286,6 +296,8 @@ paths:
 
         404:
           description: Reserva no encontrada en la BBDD/Sesion
+          schema:
+            $ref: '#/definitions/ReservasException'
         500:
           description: Error Fatal
 
@@ -332,7 +344,7 @@ definitions:
         description: Identificador del carrito de pcs
         type: number
         
-  ReservasError:
+  ReservasException:
     type: object
     properties:
       errorId:

@@ -6,10 +6,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-
+/**
+ * Clase Utils
+ */
 @Service
 public class Utils
 {
+    /**
+     * Comprueba si la sesion contiene algo y si no le genera un ArrayList
+     * @param httpSession
+     * @return
+     */
     public HttpSession comprobarResevaSession(HttpSession httpSession)
     {
         if(httpSession.getAttribute(Constantes.RESERVAS_AULAS)==null)
