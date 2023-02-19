@@ -31,7 +31,7 @@ public class SpringSecurityConfig
                 .requestMatchers("/reservas/mostrar_reservas_carrito_tablets","/reservas/reservar_carrito_tablets","/reservas/cancelar_reserva_carrito_pcs",
                         "/reservas/mostrar_reservas_carrito_pcs","/reservas/reservar_carrito_pcs","/reservas/cancelar_reserva_carrito_pcs",
                         "/reservas/mostrar_reservas_aula","/reservas/reservar_aula","/reservas/cancelar_reserva_aula",
-                        "/reservas/mostrar_reservas","/reservas/confirmar").hasAnyRole("ADMIN","User_Carrito_1Planta","User_Carrito_1Planta")
+                        "/reservas/mostrar_reservas","/reservas/confirmar").hasAnyRole("ADMIN","User_Carrito_1Planta","User_Carrito_2Planta")
                 .and().formLogin()
                 .and().httpBasic();
 
