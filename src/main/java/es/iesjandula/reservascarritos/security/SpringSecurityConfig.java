@@ -27,6 +27,9 @@ public class SpringSecurityConfig
                 //.requestMatchers("/reservas/mostrar_reservas_carrito_pcs","/reservas/reservar_carrito_pcs").hasRole("User_Carrito_Pcs")
                 //.requestMatchers("/**").hasRole("ADMIN")
 
+                //Para cualquier otra petición debes autentificarte independientemente del usuario que tengas.
+                //.anyRequest().authenticated()
+
 
                 .requestMatchers("/reservas/mostrar_reservas_carrito_tablets","/reservas/reservar_carrito_tablets","/reservas/cancelar_reserva_carrito_pcs",
                         "/reservas/mostrar_reservas_carrito_pcs","/reservas/reservar_carrito_pcs","/reservas/cancelar_reserva_carrito_pcs",
