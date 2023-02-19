@@ -49,7 +49,7 @@ public class SpringSecurityConfig
         return  new InMemoryUserDetailsManager(
                 User.withUsername("Admin").password("{noop}demo").roles("ADMIN").build(),
                 User.withUsername("User1").password("{noop}demo").roles("User_Carrito_1Planta").build(),
-                User.withUsername("User2").password("{noop}demo").roles("User_Carrito_1Planta").build()
+                User.withUsername("User2").password("{noop}demo").roles("User_Carrito_2Planta").build()
 
         );
     }
