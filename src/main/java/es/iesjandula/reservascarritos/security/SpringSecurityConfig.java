@@ -15,6 +15,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SpringSecurityConfig
 {
+    /**
+     * Metodo que aplica e implementa la seguridad por capas
+     */
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity httpSecurity) throws Exception
     {
